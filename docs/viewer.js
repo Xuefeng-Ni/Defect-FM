@@ -51,7 +51,7 @@
     picture.alt = graph.paths.map(path => path.map(edge =>
       `${edge.head} to ${edge.tail} via ${edge.relation}`
     ).join(". ")).join(". ");
-    el("graph-caption").textContent = sample.record.dataset + " · Causal Knowledge Graph";
+    el("graph-caption").textContent = sample.record.dataset + " · Corresponding Hierarchical Causal Knowledge";
     const {component, surface} = sample.record.image;
     const notes = graph.note ? [graph.note] : [];
     if (graph.productMatch) notes.push(`Matched by product and defect. Image annotations: ${names(component)} / ${names(surface)}.`);
@@ -60,7 +60,7 @@
 
   el("graph-expand").addEventListener("click", () => {
     const image = el("graph-image");
-    el("graph-heading").textContent = displayName(current.record.image.product_category || component(current)) + " · Causal Knowledge Graph";
+    el("graph-heading").textContent = displayName(current.record.image.product_category || component(current)) + " · Corresponding Hierarchical Causal Knowledge";
     el("graph-detail").src = image.src;
     el("graph-detail").alt = image.alt;
     el("native-graph").href = image.src;
