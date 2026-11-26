@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#122724">
+  <title>Defect-FM · Defect detection gallery</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="samples.js" defer></script>
+  <script src="graphs.js" defer></script>
+  <script src="viewer.js" defer></script>
+</head>
+<body>
+  <header class="mast">
+    <div class="frame mast-inner">
+      <a class="brand" href="#gallery">
+        <span class="mark" aria-hidden="true"></span>
+        <span>Defect-FM</span>
+      </a>
+      <nav aria-label="Page navigation">
+        <a href="#gallery">Gallery</a>
+        <a href="#inspection">Inspection</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="frame">
+    <section id="gallery" aria-labelledby="gallery-title">
+      <div class="section-heading">
+        <div class="heading-title">
+          <h1 id="gallery-title">Defect detection gallery</h1>
+          <span id="collection-count" class="count"></span>
+        </div>
+      </div>
+      <div id="catalog" aria-label="Select a sample"></div>
+    </section>
+
+    <section id="inspection" aria-labelledby="sample-title">
+      <div class="inspection-heading">
+        <div class="sample-identity">
+          <h2 id="sample-title"></h2>
+          <p class="sample-meta" id="sample-meta"></p>
+        </div>
+        <div class="controls">
+          <span class="link-label">Linked views</span>
+          <div class="zoom-controls">
+            <button type="button" id="minus" aria-label="Zoom out" title="Zoom out">−</button>
+            <output id="scale" aria-label="Zoom level">100%</output>
+            <button type="button" id="plus" aria-label="Zoom in" title="Zoom in">+</button>
+          </div>
+          <button type="button" class="reset" id="reset">Reset</button>
+        </div>
+      </div>
+
+      <div class="panels">
+        <article class="panel original">
+          <div class="panel-head">
+            <h3>Input image</h3>
+            <div class="toggle" role="group" aria-label="Image mode">
+              <button type="button" id="raw" aria-pressed="true">Image</button>
+              <button type="button" id="gt" aria-pressed="false">GT</button>
+            </div>
+          </div>
+          <canvas id="left" class="view" tabindex="0" aria-label="Input image"></canvas>
+          <div class="panel-foot">
+            <span id="left-legend"></span>
+            <span id="size"></span>
+          </div>
+        </article>
+
+        <article class="panel json-panel" aria-label="Causal Knowledge Graph">
+          <div class="panel-head">
+            <h3>Causal Knowledge Graph</h3>
+            <button class="graph-expand" id="graph-expand" type="button" aria-haspopup="dialog">Enlarge</button>
+          </div>
+          <figure id="graph-body" class="graph-body">
+            <img id="graph-image" class="graph-image" alt="">
+            <figcaption>
+              <p id="graph-caption"></p>
+              <p id="graph-note"></p>
+            </figcaption>
+          </figure>
+          <details class="sample-json" open>
+            <summary>Sample JSON</summary>
+            <pre tabindex="0" aria-label="Selected sample JSON"><code id="json"></code></pre>
+          </details>
+        </article>
+
+        <article class="panel detected">
+          <div class="panel-head">
+            <h3>Detections</h3>
+            <span id="detection-count" class="result-count"></span>
+          </div>
+          <canvas id="right" class="view" tabindex="0" aria-label="Model predictions"></canvas>
+          <div class="panel-foot">
+            <span class="legend pred">Predicted boxes</span>
+          </div>
+        </article>
+      </div>
+
+      <div class="inspection-status">
+        <p class="hint">Scroll to zoom or drag to pan in either image. Double-click to reset both views.</p>
+        <p id="loading" role="status"></p>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="graph-dialog" aria-labelledby="graph-heading">
+    <div class="panel-head">
+      <h3 id="graph-heading">Causal Knowledge Graph</h3>
+      <button type="button" id="close-graph" class="graph-expand" autofocus>Close</button>
+    </div>
+    <div class="dialog-body">
+      <img id="graph-detail" class="graph-image" alt="">
+      <div id="detail-caption"></div>
+      <a class="graph-native" id="native-graph" target="_blank" rel="noopener">Open graph PNG</a>
+    </div>
+  </dialog>
+</body>
+</html>
